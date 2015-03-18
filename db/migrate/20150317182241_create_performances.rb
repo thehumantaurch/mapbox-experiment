@@ -3,6 +3,7 @@ class CreatePerformances < ActiveRecord::Migration
     create_table :performances do |t|
       t.string :show_title
       t.references :theater
+      t.string :address
 
       t.timestamps
     end
