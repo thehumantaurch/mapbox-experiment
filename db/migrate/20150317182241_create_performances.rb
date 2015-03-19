@@ -4,6 +4,8 @@ class CreatePerformances < ActiveRecord::Migration
       t.string :show_title
       t.references :theater
       t.string :address
+      t.float :latitude
+      t.float :longitude
 
       t.timestamps
     end
