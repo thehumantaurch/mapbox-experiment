@@ -2,7 +2,7 @@ class CreatePerformances < ActiveRecord::Migration
   def change
     create_table :performances do |t|
       t.string :show_title
-      t.references :theater
+      t.string :theater_name
       t.string :address
       t.float :latitude
       t.float :longitude
