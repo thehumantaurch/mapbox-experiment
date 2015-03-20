@@ -9,6 +9,8 @@ class CreatePerformances < ActiveRecord::Migration
       t.date :start_date
       t.date :end_date
       t.string :genre
+      t.string :price_range
+      t.string :buy_tickets
 
       t.timestamps
     end
