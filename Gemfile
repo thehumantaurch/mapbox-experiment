@@ -19,6 +19,10 @@ gem 'nokogiri'
 
 gem 'pry'
 
+gem 'geocoder'
+
+gem 'gon-sinatra'
+
 group :test do
   gem 'shoulda-matchers'
   gem 'rack-test'

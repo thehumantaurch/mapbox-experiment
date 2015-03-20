@@ -3,6 +3,14 @@ class CreatePerformances < ActiveRecord::Migration
     create_table :performances do |t|
       t.string :show_title
       t.references :theater
+      t.string :address
+      t.float :latitude
+      t.float :longitude
+      t.date :start_date
+      t.date :end_date
+      t.string :genre
+      t.string :price_range
+      t.string :buy_tickets
 
       t.timestamps
     end
