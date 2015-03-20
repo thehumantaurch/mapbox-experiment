@@ -5,26 +5,26 @@ $(document).ready(function() {
 
   var getSymbol = function(genre) {
     if (genre == "Comedy") {
-      return "heart"
+      return "heart";
     } else if (genre == "Drama") {
-      return "danger"
+      return "danger";
     } else if (genre == "Musical") {
-      return "music"
+      return "music";
     } else if (genre == "Children's Theater") {
-      return "playground"
-    } else return "theatre"
+      return "playground";
+    } else return "theatre";
   };
 
   var getColor = function(price) {
     if (price <= 20) {
-      return "#009933"
+      return "#009933";
     } else if (price <= 40) {
-      return "#FFCC00"
-    } else return "#CC0000"
-  }
+      return "#FFCC00";
+    } else return "#CC0000";
+  };
 
   for (i = 0; i < gon.performances.length; i++) {
-    var popupContent = "<p><a href='" + gon.performances[i].buy_tickets + "'>" + gon.performances[i].show_title + '</p>';
+    var popupContent = "<p><a href='" + gon.performances[i].buy_tickets + "'>" + gon.performances[i].show_title + '</a></p></br>by<p> ' + gon.performances[i].theater_name + '</p>';
     marker = new L.marker([
       gon.performances[i].latitude,
       gon.performances[i].longitude], {
