@@ -24,6 +24,9 @@ $(document).ready(function() {
   };
 
   for (i = 0; i < gon.performances.length; i++) {
+    if (new Date(gon.performances[i].start_date.toString()) > new Date()) {
+
+    };
     var popupContent = "<p><a href='" + gon.performances[i].buy_tickets + "'>" + gon.performances[i].show_title + '</a></p></br>by<p> ' + gon.performances[i].theater_name + '</p>';
     marker = new L.marker([
       gon.performances[i].latitude,
