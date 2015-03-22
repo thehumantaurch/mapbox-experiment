@@ -23,23 +23,48 @@ $(document).ready(function() {
     } else return "#CC0000";
   };
 
-  for (i = 0; i < gon.performances.length; i++) {
-    if (new Date(gon.performances[i].start_date.toString()) > new Date()) {
+  var compareDate = function(startDate, endDate) {
+    today = new Date();
+    start = new Date(startDate);
+    end = new Date(endDate);
 
-    };
-    var popupContent = "<p><a href='" + gon.performances[i].buy_tickets + "'>" + gon.performances[i].show_title + '</a></p></br>by<p> ' + gon.performances[i].theater_name + '</p>';
-    marker = new L.marker([
-      gon.performances[i].latitude,
-      gon.performances[i].longitude], {
-        icon: L.mapbox.marker.icon({
-          'marker-size': 'medium',
-          'marker-symbol': getSymbol(gon.performances[i].genre),
-          'marker-color': getColor(gon.performances[i].price_low)
-        })
-      })
-    .bindPopup(popupContent).openPopup()
-    .addTo(map);
-  }
+    if (start > today) {
+      return 'upcoming';
+    } else if (start < today < end) {
+      return 'tonight';
+    } else if (today > end) {
+      return 'closed';
+    }
+  };
 
+var geojson = [];
+
+var layer = L.mapbox.featureLayer().addTo(map);
+
+for (i = 0; i < gon.performances.length; i++) {
+  var marker =
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          gon.performances[i].longitude,
+          gon.performances[i].latitude
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "title": gon.performances[i].show_title,
+        "address": gon.performances[i].address,
+        "marker-color": getColor(gon.performances[i].price_low),
+        "marker-size": "medium",
+        "marker-symbol": getSymbol(gon.performances[i].genre)
+      }
+    }
+    geojson.push(marker);
+  };
+
+  layer.setGeoJSON(geojson);
+  layer.on('ready', function() {
+    map.fitBounds(layer.getBounds());
+  });
 });
-
