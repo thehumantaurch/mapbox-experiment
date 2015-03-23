@@ -55,7 +55,6 @@ end
 
 get '/' do
   @performances = Performance.all
-  @showtimes = ShowTime.all
   gon.performances = @performances
   erb :index
 end
