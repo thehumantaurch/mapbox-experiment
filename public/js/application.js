@@ -17,10 +17,10 @@ $(document).ready(function() {
 
   var getColor = function(price) {
     if (price <= 20) {
-      return "#009933";
+      return "#0c3b3b";
     } else if (price <= 40) {
-      return "#FFCC00";
-    } else return "#CC0000";
+      return "#FFC266";
+    } else return "#7A0000";
   };
 
   var showToday = function(performance, startDate, endDate) {
@@ -98,8 +98,9 @@ $(document).ready(function() {
     });
 
   layer.setGeoJSON(geojson);
-  var test = layer.getBounds();
-  map.fitBounds(test);
+  var bounds = layer.getBounds();
+  map.fitBounds(bounds);
+  map.legendControl.addLegend(document.getElementById('legend').innerHTML);
 
 
   finished = document.getElementById('filter-closed');
@@ -109,9 +110,13 @@ $(document).ready(function() {
 
     finished.onclick = function() {
         finished.className = 'active';
+        finished.innerHTML = finished.innerHTML + "!";
         upcoming.className = '';
+        upcoming.innerHTML = "Upcoming";
         tonight.className = '';
+        tonight.innerHTML = "Tonight";
         all.className = '';
+        all.innerHTML = "All";
         layer.setFilter(function(f) {
             return f.properties['finished'] === true;
         });
@@ -120,9 +125,13 @@ $(document).ready(function() {
 
     upcoming.onclick = function() {
         finished.className = '';
+        finished.innerHTML = "Closed";
         upcoming.className = 'active';
+        upcoming.innerHTML = upcoming.innerHTML + "!";
         tonight.className = '';
+        tonight.innerHTML = "Tonight";
         all.className = '';
+        all.innerHTML = "All";
         layer.setFilter(function(f) {
             return f.properties['upcoming'] === true;
         });
@@ -132,8 +141,11 @@ $(document).ready(function() {
     tonight.onclick = function(e) {
         finished.className = '';
         upcoming.className = '';
+        upcoming.innerHTML = "Upcoming";
         tonight.className = 'active';
+        tonight.innerHTML = tonight.innerHTML + "!";
         all.className = '';
+        all.innerHTML = "All";
         layer.setFilter(function(f) {
             return f.properties['tonight'] === true;
         });
@@ -142,9 +154,13 @@ $(document).ready(function() {
 
     all.onclick = function() {
         finished.className = '';
+        finished.innerHTML = "Closed";
         upcoming.className = '';
+        upcoming.innerHTML = "Upcoming";
         tonight.className = '';
+        tonight.innerHTML = "Tonight";
         all.className = 'active';
+        all.innerHTML = all.innerHTML + "!";
         layer.setFilter(function(f) {
             return true;
         });

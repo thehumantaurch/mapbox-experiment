@@ -1,9 +1,19 @@
 <nav id='menu-ui' class='menu-ui'>
-  <a href='#' class='active' id='filter-all'>All</a>
+  <a href='#' class='active' id='filter-all'>All!</a>
   <a href='#' id='filter-tonight'>Tonight</a>
   <a href='#' id='filter-upcoming'>Upcoming</a>
   <a href='#' id='filter-closed'>Closed</a>
 </nav>
+<div id='legend' style='display:none;'>
+  <strong>What Shows Are On?</strong>
+  <nav class='legend clearfix'>
+    <span style='background:#0c3b3b;'></span>
+    <span style='background:#FFC266;'></span>
+    <span style='background:#7A0000;'></span><br>
+    <label>< $20 </label>
+    <label>< $40</label>
+    <label>> $40</label>
+</div>
 <div id="map">
   <%= include_gon %>
 </div>
