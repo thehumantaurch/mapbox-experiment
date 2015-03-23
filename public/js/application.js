@@ -56,7 +56,7 @@ $(document).ready(function() {
 
   var geojson = [];
 
-  var layer = L.mapbox.featureLayer().addTo(map);
+  var layer = L.mapbox.featureLayer();
 
   for (i = 0; i < gon.performances.length; i++) {
     var marker =
@@ -97,11 +97,11 @@ $(document).ready(function() {
       });
     });
 
-  layer.setGeoJSON(geojson);
-
-  layer.on('ready', function() {
-    map.fitBounds(layer.getBounds());
-  });
+  layer.setGeoJSON(geojson).addTo(map);
+  map.fitBounds(layer.getBounds());
+  // layer.on('ready', function() {
+  //   map.fitBounds(layer.getBounds());
+  // });
 
   map.legendControl.addLegend(document.getElementById('legend').innerHTML);
 
