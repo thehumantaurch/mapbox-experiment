@@ -98,8 +98,11 @@ $(document).ready(function() {
     });
 
   layer.setGeoJSON(geojson);
+
   layer.on('ready', function() {
     map.fitBounds(layer.getBounds());
+  });
+
   map.legendControl.addLegend(document.getElementById('legend').innerHTML);
 
 
