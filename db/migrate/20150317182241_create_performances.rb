@@ -12,6 +12,7 @@ class CreatePerformances < ActiveRecord::Migration
       t.integer :price_low
       t.integer :price_high
       t.string :buy_tickets
+      t.string :days
 
       t.timestamps
     end
