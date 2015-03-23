@@ -1,7 +1,7 @@
 $(document).ready(function() {
   L.mapbox.accessToken = 'pk.eyJ1IjoidGhlaHVtYW50YXVyY2giLCJhIjoiLUJ5Nkd6NCJ9.dCa7lSVwCoV9n9mDoWgwhg';
 
-  var map = L.mapbox.map('map', 'thehumantaurch.lg48lh4f');
+  var map = L.mapbox.map('map', 'thehumantaurch.32edc5fc');
 
   var getSymbol = function(genre) {
     if (genre == "Comedy") {
@@ -82,7 +82,6 @@ $(document).ready(function() {
           "marker-symbol": getSymbol(gon.performances[i].genre)
         }
       };
-      debugger
       geojson.push(marker);
     }
 
@@ -99,14 +98,13 @@ $(document).ready(function() {
     });
 
   layer.setGeoJSON(geojson);
-  layer.on('ready', function() {
-    map.fitBounds(layer.getBounds());
-  });
+  var test = layer.getBounds();
+  map.fitBounds(test);
 
 
-  finished = document.getElementById('filter-closed'),
-  upcoming = document.getElementById('filter-upcoming'),
-  tonight = document.getElementById('filter-tonight'),
+  finished = document.getElementById('filter-closed');
+  upcoming = document.getElementById('filter-upcoming');
+  tonight = document.getElementById('filter-tonight');
   all = document.getElementById('filter-all');
 
     finished.onclick = function() {
