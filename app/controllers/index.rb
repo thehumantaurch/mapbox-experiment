@@ -21,11 +21,21 @@ before '/' do
 
     shows.each do |link|
       doc = Nokogiri::HTML(open("http://theatrewashington.org/#{link}"))
-
       price_range = doc.css("#performances-description-specifics").children.children.children.text.split("\t\t\t")[-1].strip.split("-")
 
       start_date = Date.strptime(doc.css("#performances-curtain-times > caption > span > span:nth-child(1)").children.text, "%m/%d/%Y")
       end_date = Date.strptime(doc.css("#performances-curtain-times > caption > span > span:nth-child(2)").children.text, '%m/%d/%Y')
+
+      showtimes = doc.xpath("//*[@id='performances-curtain-times']")
+      @showtimes = showtimes[0].text.split("\n\t")
+
+      days = ""
+
+      @showtimes.each_index do |index|
+        if @showtimes[index].include?("m")
+          days << @showtimes[index-1]
+        end
+      end
 
       @performance = Performance.find_or_create_by(
         show_title: doc.css('#rt-main > div > div.rt-grid-12 > div > div > div > div.rt-module-inner > div > div > div.rt-article > div.rt-headline').children.text.strip,
@@ -36,7 +46,8 @@ before '/' do
         end_date: end_date,
         genre: doc.css("#performances-description-specifics").children.children.children.text.split("\t\t\t")[1].strip,
         price_low: price_range[0].strip.delete("$").to_i,
-        price_high: price_range[1].strip.delete("$").to_i
+        price_high: price_range[1].strip.delete("$").to_i,
+        days: days
         )
     end
   end
@@ -44,6 +55,7 @@ end
 
 get '/' do
   @performances = Performance.all
+  @showtimes = ShowTime.all
   gon.performances = @performances
   erb :index
 end
