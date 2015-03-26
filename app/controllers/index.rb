@@ -4,14 +4,13 @@ require 'pry'
 require 'geocoder'
 require 'gon-sinatra'
 require 'date'
+require 'rufus-scheduler'
+
+scheduler = Rufus::Scheduler.new
 
 Sinatra::register Gon::Sinatra
-enable :sessions
 
-before '/' do
-  if request.cookies['cookie'] == nil
-    response.set_cookie('cookie', :value => session[:session_id], :path => '/', :expires => Time.now + 604800)
-
+scheduler.cron "00 03 * * 1" do
     doc = Nokogiri::HTML(open("http://theatrewashington.org/find-a-show?page=full"))
 
     shows = []
@@ -49,7 +48,6 @@ before '/' do
         price_high: price_range[1].strip.delete("$").to_i,
         days: days
         )
-    end
   end
 end
 
