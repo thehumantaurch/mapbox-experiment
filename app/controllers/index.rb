@@ -10,7 +10,7 @@ scheduler = Rufus::Scheduler.new
 
 Sinatra::register Gon::Sinatra
 
-scheduler.cron "00 03 * * 1" do
+scheduler.cron "00 03 * * 1", :first => :now do
     doc = Nokogiri::HTML(open("http://theatrewashington.org/find-a-show?page=full"))
 
     shows = []
