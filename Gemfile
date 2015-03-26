@@ -23,6 +23,8 @@ gem 'geocoder'
 
 gem 'gon-sinatra'
 
+gem 'rufus-scheduler'
+
 group :test do
   gem 'shoulda-matchers'
   gem 'rack-test'
