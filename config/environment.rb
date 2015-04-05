@@ -10,6 +10,8 @@ require 'rubygems'
 
 require 'uri'
 require 'pathname'
+require 'rufus-scheduler'
+require 'pry'
 
 require 'pg'
 require 'active_record'
@@ -35,6 +37,7 @@ configure do
 
   # Set the views to
   set :views, File.join(Sinatra::Application.root, "app", "views")
+
 end
 
 # Set up the controllers and helpers
@@ -43,3 +46,8 @@ Dir[APP_ROOT.join('app', 'helpers', '*.rb')].each { |file| require file }
 
 # Set up the database and models
 require APP_ROOT.join('config', 'database')
+
+set :scheduler, Rufus::Scheduler.new
+settings.scheduler.cron "00 03 * * 1", :first => :now do
+  get_perfs
+end
