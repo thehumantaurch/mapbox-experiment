@@ -1,3 +1,5 @@
+require 'geocoder'
+
 class Performance < ActiveRecord::Base
 
   extend Geocoder::Model::ActiveRecord
