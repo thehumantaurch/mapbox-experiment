@@ -44,11 +44,13 @@ $(document).ready(function() {
     } else return false;
   };
 
-  var showClosed = function(endDate) {
+  var closingSoon = function(endDate) {
+    debugger;
     today = new Date();
     end = new Date(endDate);
+    dif = Math.floor((end - today)/(1000*3600*24));
 
-    if (end < today) {
+    if (dif < 7) {
       return true;
     } else return false;
   };
@@ -76,7 +78,7 @@ $(document).ready(function() {
           "url": gon.performances[i].buy_tickets,
           "tonight": showToday(gon.performances[i], gon.performances[i].start_date, gon.performances[i].end_date),
           "upcoming": showUpcoming(gon.performances[i].start_date),
-          "finished": showClosed(gon.performances[i].end_date),
+          "closing-soon": closingSoon(gon.performances[i].end_date),
           "marker-color": getColor(gon.performances[i].price_low),
           "marker-size": "large",
           "marker-symbol": getSymbol(gon.performances[i].genre)
@@ -103,14 +105,14 @@ $(document).ready(function() {
   map.legendControl.addLegend(document.getElementById('legend').innerHTML);
 
 
-  finished = document.getElementById('filter-closed');
+  closingSoon = document.getElementById('filter-closing-soon');
   upcoming = document.getElementById('filter-upcoming');
   tonight = document.getElementById('filter-tonight');
   all = document.getElementById('filter-all');
 
-    finished.onclick = function() {
-        finished.className = 'active';
-        finished.innerHTML = finished.innerHTML + "!";
+    closingSoon.onclick = function() {
+        closingSoon.className = 'active';
+        closingSoon.innerHTML = closingSoon.innerHTML + "!";
         upcoming.className = '';
         upcoming.innerHTML = "Upcoming";
         tonight.className = '';
@@ -118,14 +120,14 @@ $(document).ready(function() {
         all.className = '';
         all.innerHTML = "All";
         layer.setFilter(function(f) {
-            return f.properties['finished'] === true;
+            return f.properties['closing-soon'] === true;
         });
         return false;
     };
 
     upcoming.onclick = function() {
-        finished.className = '';
-        finished.innerHTML = "Closed";
+        closingSoon.className = '';
+        closingSoon.innerHTML = "Closing Soon";
         upcoming.className = 'active';
         upcoming.innerHTML = upcoming.innerHTML + "!";
         tonight.className = '';
@@ -139,7 +141,7 @@ $(document).ready(function() {
     };
 
     tonight.onclick = function(e) {
-        finished.className = '';
+        closingSoon.className = '';
         upcoming.className = '';
         upcoming.innerHTML = "Upcoming";
         tonight.className = 'active';
@@ -153,8 +155,8 @@ $(document).ready(function() {
     };
 
     all.onclick = function() {
-        finished.className = '';
-        finished.innerHTML = "Closed";
+        closingSoon.className = '';
+        closingSoon.innerHTML = "Closing Soon";
         upcoming.className = '';
         upcoming.innerHTML = "Upcoming";
         tonight.className = '';
