@@ -65,8 +65,8 @@ document.addEventListener('DOMContentLoaded', function () {
         "type": "Feature",
         "geometry": {
           "coordinates": [
-            gon.performances[i].latitude,
-            gon.performances[i].longitude
+            gon.performances[i].longitude,
+            gon.performances[i].latitude
           ],
           "type": "Point"
         },
@@ -97,6 +97,7 @@ document.addEventListener('DOMContentLoaded', function () {
           minWidth: 320
       });
     });
+
   layer.setGeoJSON(geojson).addTo(map);
   map.fitBounds(layer.getBounds());
 
