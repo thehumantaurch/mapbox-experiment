@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
     bounds = L.latLngBounds(southWest, northEast);
 
   var map = L.mapbox.map('map', 'thehumantaurch.32edc5fc', {
-    maxBounds: bounds;
+    maxBounds: bounds,
     maxZoom: 19,
     minZoom: 10
   });
