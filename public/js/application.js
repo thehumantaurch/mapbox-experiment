@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
   layer.setGeoJSON(geojson).addTo(map);
-  map.fitBounds(layer.getBounds());
+  // map.fitBounds(layer.getBounds());
 
   map.legendControl.addLegend(document.getElementById('legend').innerHTML);
 
