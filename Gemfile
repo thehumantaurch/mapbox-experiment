@@ -25,6 +25,8 @@ gem 'gon-sinatra'
 
 gem 'rufus-scheduler'
 
+gem 'sinatra-assetpack', :require => 'sinatra/assetpack'
+
 group :test do
   gem 'shoulda-matchers'
   gem 'rack-test'
