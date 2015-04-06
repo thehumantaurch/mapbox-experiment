@@ -1,4 +1,4 @@
-$(document).ready(function() {
+document.addEventListener('DOMContentLoaded', function () {
   L.mapbox.accessToken = 'pk.eyJ1IjoidGhlaHVtYW50YXVyY2giLCJhIjoiLUJ5Nkd6NCJ9.dCa7lSVwCoV9n9mDoWgwhg';
 
   var map = L.mapbox.map('map', 'thehumantaurch.32edc5fc');
@@ -45,7 +45,6 @@ $(document).ready(function() {
   };
 
   var closingSoon = function(endDate) {
-    debugger;
     today = new Date();
     end = new Date(endDate);
     dif = Math.floor((end - today)/(1000*3600*24));
