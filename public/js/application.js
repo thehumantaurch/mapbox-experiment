@@ -1,7 +1,15 @@
 document.addEventListener('DOMContentLoaded', function () {
   L.mapbox.accessToken = 'pk.eyJ1IjoidGhlaHVtYW50YXVyY2giLCJhIjoiLUJ5Nkd6NCJ9.dCa7lSVwCoV9n9mDoWgwhg';
 
-  var map = L.mapbox.map('map', 'thehumantaurch.32edc5fc');
+  var southWest = L.latLng(38.6362, -77.6843),
+    northEast = L.latLng(39.2875, -76.4319),
+    bounds = L.latLngBounds(southWest, northEast);
+
+  var map = L.mapbox.map('map', 'thehumantaurch.32edc5fc', {
+    maxBounds: bounds;
+    maxZoom: 19,
+    minZoom: 10
+  });
 
   var getSymbol = function(genre) {
     if (genre == "Comedy") {
@@ -99,7 +107,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
   layer.setGeoJSON(geojson).addTo(map);
-  map.fitBounds(layer.getBounds());
+  map.fitBounds(bounds);
 
   map.legendControl.addLegend(document.getElementById('legend').innerHTML);
 
