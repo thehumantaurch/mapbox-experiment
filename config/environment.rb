@@ -20,6 +20,8 @@ require 'logger'
 require 'sinatra'
 require "sinatra/reloader" if development?
 
+require 'sinatra/assetpack'
+
 require 'erb'
 
 # Some helper constants for path-centric logic
@@ -34,6 +36,28 @@ configure do
   # See: http://www.sinatrarb.com/faq.html#sessions
   enable :sessions
   set :session_secret, ENV['SESSION_SECRET'] || 'this is a secret shhhhh'
+
+  register Sinatra::AssetPack
+    assets {
+    serve '/js',     from: 'public/js'        # Default
+    serve '/css',    from: 'public/css'       # Default
+
+    # The second parameter defines where the compressed version will be served.
+    # (Note: that parameter is optional, AssetPack will figure it out.)
+    # The final parameter is an array of glob patterns defining the contents
+    # of the package (as matched on the public URIs, not the filesystem)
+    js :app, '/js/application.js', [
+      '/js/vendor/**/*.js',
+      '/js/lib/**/*.js'
+    ]
+
+    css :application, '/css/application.css', [
+      '/css/normalize.css'
+    ]
+
+    js_compression  :jsmin    # :jsmin | :yui | :closure | :uglify
+    css_compression :simple   # :simple | :sass | :yui | :sqwish
+  }
 
   # Set the views to
   set :views, File.join(Sinatra::Application.root, "app", "views")
