@@ -65,8 +65,8 @@ document.addEventListener('DOMContentLoaded', function () {
         "type": "Feature",
         "geometry": {
           "coordinates": [
-            parseFloat(gon.performances[i].longitude),
-            parseFloat(gon.performances[i].latitude)
+            gon.performances[i].longitude,
+            gon.performances[i].latitude
           ],
           "type": "Point"
         },
